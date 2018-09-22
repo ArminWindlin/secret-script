@@ -12,14 +12,19 @@ let till = 23;
 let slower = 2;
 let farmer_switch = true;
 let recruiter_switch = false;
-let culture_switch = false;
+let culture_switch = true;
 // CONFIG FARMER
-let islands = [23886, 32698, 31434, 25566, 30528, 21637, 29490, 28589, 24148, 22357, 25296, 27144, 31551, 23886];
+let islands = [24300, 23886, 32698, 31434, 25566, 30528, 21637, 29490, 28589, 24148, 22357, 25296, 27144, 31551, 24300];
 // CONFIG CULTURE
-let cul = [true, true, true, true, true, true, true, true, true, true, false, true, true];
+let cul = [true, true, true, true, true,
+    true, true, true, true, true,
+    true, true, true, true];
 // CONFIG RECRUITER
-let wind = ['', '', 'barracks', 'barracks', '', 'barracks', 'docks', '', 'docks']; //barracks, docks
-let unit = ['', '', 'attack_ship', 'hoplite', '', 'hoplite', 'attack_ship', '', 'attack_ship'];//trireme, bireme, attack_ship, chariot, hoplite
+// trireme, bireme, attack_ship, chariot, hoplite
+let wind = ['barracks', 'docks', 'docks', 'barracks', 'barracks',
+    'barracks', 'docks', 'barracks', 'docks', 'barracks'];
+let unit = ['', '', 'attack_ship', 'hoplite', '',
+    'hoplite', 'attack_ship', '', 'attack_ship', 'hoplite'];
 
 // AUTOMATION //
 
@@ -43,7 +48,7 @@ setInterval(() => {
 
 // MULTI FARMER //
 function multiFarmer() {
-    if(!farmer_switch)
+    if (!farmer_switch)
         return;
     if (!flag) {
         flag = true;
@@ -81,7 +86,7 @@ function multiFarmer() {
 
 // RECRUITER
 function recruiter() {
-    if(!recruiter_switch)
+    if (!recruiter_switch)
         return;
     if (!flag) {
         flag = true;
@@ -98,7 +103,7 @@ function recruiter() {
 
     for (let i = 0; i < wind.length; i++) {
 
-        if (wind[i] === '') {
+        if (unit[i] === '') {
             timeCounter = switchCity(timeCounter);
             continue;
         }
@@ -128,7 +133,7 @@ function recruiter() {
 }
 
 function culture() {
-    if(!culture_switch)
+    if (!culture_switch)
         return;
     if (!flag) {
         flag = true;
@@ -205,6 +210,6 @@ function switchCity(timeCounter) {
 $("body").keydown(function (e) {
 //-------------------------------------------------------//
     if ((e.keyCode || e.which) == 106) { //key: *
-        recruiter();
+        culture();
     }
 });
