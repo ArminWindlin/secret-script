@@ -11,20 +11,30 @@ let flag = false;
 let till = 23;
 let slower = 2;
 let farmer_switch = true;
-let recruiter_switch = false;
+let recruiter_switch = true;
 let culture_switch = true;
 // CONFIG FARMER
-let islands = [24300, 23886, 32698, 31434, 25566, 30528, 21637, 29490, 28589, 24148, 22357, 25296, 27144, 31551, 24300];
+let islands = [23863, 19492, 24300, 20596, 23886, 32698, 31434, 25566, 30528, 21637, 29490, 28589, 24148, 22357, 25296, 27144, 31551, 23863];
 // CONFIG CULTURE
 let cul = [true, true, true, true, true,
     true, true, true, true, true,
-    true, true, true, true];
+    true, true, true, true, true,
+    true, true];
+let triumph = true;
 // CONFIG RECRUITER
-// trireme, bireme, attack_ship, chariot, hoplite
+// trireme, bireme, attack_ship, chariot, hoplite, slinger, archer
+let rec = [true, true, true, true, true,
+    true, true, true, true, true,
+    true, true, true, true, true,
+    true, true];
 let wind = ['barracks', 'docks', 'docks', 'barracks', 'barracks',
-    'barracks', 'docks', 'barracks', 'docks', 'barracks'];
-let unit = ['', '', 'attack_ship', 'hoplite', '',
-    'hoplite', 'attack_ship', '', 'attack_ship', 'hoplite'];
+    'barracks', 'docks', 'barracks', 'docks', 'barracks',
+    'docks', 'barracks', 'docks', 'docks', 'barracks',
+    'docks','docks'];
+let unit = ['harpy', 'bireme', 'attack_ship', 'hoplite', 'griffin',
+    'hoplite', 'attack_ship', 'manticore', 'attack_ship', 'hoplite',
+    'bireme', 'slinger', 'attack_ship', 'attack_ship', 'archer',
+    'bireme','attack_ship'];
 
 // AUTOMATION //
 
@@ -103,7 +113,7 @@ function recruiter() {
 
     for (let i = 0; i < wind.length; i++) {
 
-        if (unit[i] === '') {
+        if (!rec[i]) {
             timeCounter = switchCity(timeCounter);
             continue;
         }
@@ -121,12 +131,16 @@ function recruiter() {
         }, timeCounter * slower * 1000 + Math.floor(Math.random() * 500));
         timeCounter++;
         setTimeout(() => {
-            $('.btn_wnd.close')[0].click();
+            $('.ui-dialog-titlebar-close')[0].click();
         }, timeCounter * slower * 1000 + Math.floor(Math.random() * 500));
         timeCounter++;
 
         timeCounter = switchCity(timeCounter);
     }
+    setTimeout(() => {
+        $('.ui-dialog-titlebar-close')[0].click();
+    }, timeCounter * slower * 1000 + Math.floor(Math.random() * 500));
+    timeCounter++;
     setTimeout(() => {
         flag = false;
     }, timeCounter * slower * 1000 + Math.floor(Math.random() * 500));
@@ -161,7 +175,7 @@ function culture() {
             $('.btn_city_festival.button_new')[0].click();
         }, timeCounter * slower * 1000 + Math.floor(Math.random() * 500));
         timeCounter++;
-        if (i === 0) {
+        if (i === 0 && triumph) {
             setTimeout(() => {
                 $('.btn_victory_procession.button_new')[0].click();
             }, timeCounter * slower * 1000 + Math.floor(Math.random() * 500));
@@ -169,9 +183,8 @@ function culture() {
         }
         timeCounter = switchCity(timeCounter);
     }
-
     setTimeout(() => {
-        $('.btn_wnd.close')[0].click();
+        $('.ui-dialog-titlebar-close')[0].click();
     }, timeCounter * slower * 1000 + Math.floor(Math.random() * 500));
     timeCounter++;
     setTimeout(() => {
@@ -210,6 +223,6 @@ function switchCity(timeCounter) {
 $("body").keydown(function (e) {
 //-------------------------------------------------------//
     if ((e.keyCode || e.which) == 106) { //key: *
-        culture();
+        recruiter();
     }
 });
