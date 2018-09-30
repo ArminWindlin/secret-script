@@ -10,31 +10,43 @@
 let flag = false;
 let till = 23;
 let slower = 2;
-let farmer_switch = true;
-let recruiter_switch = true;
-let culture_switch = true;
+let farmer_switch = true;///////
+let recruiter_switch = true;///
+let culture_switch = true;/////
+let builder_switch = true;//////
 // CONFIG FARMER
-let islands = [23863, 19492, 24300, 20596, 23886, 32698, 31434, 25566, 30528, 21637, 29490, 28589, 24148, 22357, 25296, 27144, 31551, 23863];
+let islands = [34671, 23863, 19492, 24300, 20596, 23886, 32698, 31434, 25566, 30528, 21637, 29490, 28589, 24148, 22357, 25296, 27144, 31551, 35871, 34671];
 // CONFIG CULTURE
 let cul = [true, true, true, true, true,
     true, true, true, true, true,
     true, true, true, true, true,
-    true, true];
+    true, true, true];
+let orp = 1;
 let triumph = true;
 // CONFIG RECRUITER
 // trireme, bireme, attack_ship, chariot, hoplite, slinger, archer
 let rec = [true, true, true, true, true,
     true, true, true, true, true,
     true, true, true, true, true,
-    true, true];
+    true, true, true];
 let wind = ['barracks', 'docks', 'docks', 'barracks', 'barracks',
     'barracks', 'docks', 'barracks', 'docks', 'barracks',
     'docks', 'barracks', 'docks', 'docks', 'barracks',
-    'docks','docks'];
+    'docks', 'docks', 'docks'];
 let unit = ['harpy', 'bireme', 'attack_ship', 'hoplite', 'griffin',
     'hoplite', 'attack_ship', 'manticore', 'attack_ship', 'hoplite',
     'bireme', 'slinger', 'attack_ship', 'attack_ship', 'archer',
-    'bireme','attack_ship'];
+    'bireme', 'attack_ship', 'attack_ship'];
+// CONFIG BUILDER
+// main, lumber, ironer, stoner, farm, storage, academy, barracks, docks, temple, market, wall, hide
+let build = [false, false, true, true, true,
+    true, true, true, true, true,
+    true, false, true, true, true,
+    true, false, true, true];
+let building = ['', '', 'docks', 'academy', 'farm',
+    'temple', 'farm', 'farm', 'farm', 'academy',
+    'academy', '', 'farm', 'academy', 'farm',
+    'farm', '', 'hide', 'academy'];
 
 // AUTOMATION //
 
@@ -55,6 +67,12 @@ setInterval(() => {
     if (hour >= 6 && hour < till)
         culture()
 }, (30 * 60 * 1000 + Math.floor((Math.random() * 30000) + 1000)));
+
+setInterval(() => {
+    let hour = new Date().getHours();
+    if (hour >= 6 && hour < till)
+        culture()
+}, (88 * 60 * 1000 + Math.floor((Math.random() * 30000) + 1000)));
 
 // MULTI FARMER //
 function multiFarmer() {
@@ -111,7 +129,7 @@ function recruiter() {
 
     timeCounter = selectFirstCity(timeCounter);
 
-    for (let i = 0; i < wind.length; i++) {
+    for (let i = 0; i < build.length; i++) {
 
         if (!rec[i]) {
             timeCounter = switchCity(timeCounter);
@@ -119,7 +137,7 @@ function recruiter() {
         }
 
         setTimeout(() => {
-            window.BuildingWindowFactory.open(wind[i]);
+            window.BuildingWindowFactory.open(build[i]);
         }, timeCounter * slower * 1000 + Math.floor(Math.random() * 500));
         timeCounter++;
         setTimeout(() => {
@@ -175,14 +193,66 @@ function culture() {
             $('.btn_city_festival.button_new')[0].click();
         }, timeCounter * slower * 1000 + Math.floor(Math.random() * 500));
         timeCounter++;
-        if (i === 0 && triumph) {
+        if (i === orp && triumph) {
             setTimeout(() => {
                 $('.btn_victory_procession.button_new')[0].click();
+            }, timeCounter * slower * 1000 + Math.floor(Math.random() * 500));
+            timeCounter++;
+            setTimeout(() => {
+                $('.btn_theater_plays')[0].click();
             }, timeCounter * slower * 1000 + Math.floor(Math.random() * 500));
             timeCounter++;
         }
         timeCounter = switchCity(timeCounter);
     }
+    setTimeout(() => {
+        $('.ui-dialog-titlebar-close')[0].click();
+    }, timeCounter * slower * 1000 + Math.floor(Math.random() * 500));
+    timeCounter++;
+    setTimeout(() => {
+        flag = false;
+    }, timeCounter * slower * 1000 + Math.floor(Math.random() * 500));
+}
+
+// BUILDER
+function builder() {
+    if (!builder_switch)
+        return;
+    if (!flag) {
+        flag = true;
+    } else {
+        setTimeout(() => {
+            builder();
+        }, (20 * 1000));
+        return;
+    }
+
+    let timeCounter = 1;
+
+    timeCounter = selectFirstCity(timeCounter);
+
+    setTimeout(() => {
+        window.MainWindowFactory.openMainWindow();
+    }, timeCounter * slower  * 1000 + Math.floor(Math.random() * 500));
+    timeCounter++;
+
+    for (let i = 0; i < build.length; i++) {
+        if (!build[i]) {
+            timeCounter = switchCity(timeCounter);
+            continue;
+        }
+        setTimeout(() => {
+            window.BuildingMain.buildBuilding(building[i]);
+        }, timeCounter * slower  * 1000 + Math.floor(Math.random() * 500));
+        timeCounter++;
+        setTimeout(() => {
+            window.BuildingMain.buildBuilding(building[i]);
+        }, timeCounter * slower  * 1000 + Math.floor(Math.random() * 500));
+        timeCounter++;
+
+        timeCounter = switchCity(timeCounter);
+    }
+
     setTimeout(() => {
         $('.ui-dialog-titlebar-close')[0].click();
     }, timeCounter * slower * 1000 + Math.floor(Math.random() * 500));
@@ -223,6 +293,6 @@ function switchCity(timeCounter) {
 $("body").keydown(function (e) {
 //-------------------------------------------------------//
     if ((e.keyCode || e.which) == 106) { //key: *
-        recruiter();
+        builder();
     }
 });
