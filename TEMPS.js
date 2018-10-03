@@ -15,7 +15,9 @@ let recruiter_switch = true;///
 let culture_switch = true;/////
 let builder_switch = true;//////
 // CONFIG FARMER
-let islands = [34671, 23863, 19492, 24300, 20596, 23886, 32698, 31434, 25566, 30528, 21637, 29490, 28589, 24148, 22357, 25296, 27144, 31551, 35871, 34671];
+let islands = [34671, 23863, 19492, 18063, 24300, 20596, 23886, 32698, 31434, 25566,
+    30528, 21637, 29490, 28589, 24148, 22357, 25296, 27144, 31551, 35871,
+    34671];
 // CONFIG CULTURE
 let cul = [true, true, true, true, true,
     true, true, true, true, true,
@@ -25,28 +27,28 @@ let orp = 1;
 let triumph = true;
 // CONFIG RECRUITER
 // trireme, bireme, attack_ship, chariot, hoplite, slinger, archer
-let rec = [true, true, true, true, true,
-    true, true, true, true, true,
-    true, true, true, true, true,
-    true, true, true];
+let rec = [true, false, true, false, true,
+    true, true, true, true, false,
+    false, true, true, true, true,
+    true, true, true, true, true];
 let wind = ['barracks', 'docks', 'docks', 'barracks', 'barracks',
     'barracks', 'docks', 'barracks', 'docks', 'barracks',
     'docks', 'barracks', 'docks', 'docks', 'barracks',
-    'docks', 'docks', 'docks'];
+    'docks', 'docks', 'docks', 'barracks', 'docks'];
 let unit = ['harpy', 'bireme', 'attack_ship', 'hoplite', 'griffin',
     'hoplite', 'attack_ship', 'manticore', 'attack_ship', 'hoplite',
     'bireme', 'slinger', 'attack_ship', 'attack_ship', 'archer',
-    'bireme', 'attack_ship', 'attack_ship'];
+    'bireme', 'attack_ship', 'attack_ship', 'hoplite', 'attack_ship'];
 // CONFIG BUILDER
 // main, lumber, ironer, stoner, farm, storage, academy, barracks, docks, temple, market, wall, hide
-let build = [false, false, true, true, true,
+let build = [false, false, true, false, false,
+    true, true, false, true, true,
     true, true, true, true, true,
-    true, false, true, true, true,
-    true, false, true, true];
-let building = ['', '', 'docks', 'academy', 'farm',
-    'temple', 'farm', 'farm', 'farm', 'academy',
-    'academy', '', 'farm', 'academy', 'farm',
-    'farm', '', 'hide', 'academy'];
+    true, false, true, true, true];
+let building = ['', 'temple', 'docks', 'academy', '',
+    'temple', 'farm', '', 'academy', 'academy',
+    'storage', 'academy', 'farm', 'storage', 'farm',
+    'docks', '', 'storage', 'academy', 'academy'];
 
 // AUTOMATION //
 
@@ -71,7 +73,7 @@ setInterval(() => {
 setInterval(() => {
     let hour = new Date().getHours();
     if (hour >= 6 && hour < till)
-        culture()
+        builder()
 }, (88 * 60 * 1000 + Math.floor((Math.random() * 30000) + 1000)));
 
 // MULTI FARMER //
@@ -129,7 +131,7 @@ function recruiter() {
 
     timeCounter = selectFirstCity(timeCounter);
 
-    for (let i = 0; i < build.length; i++) {
+    for (let i = 0; i < wind.length; i++) {
 
         if (!rec[i]) {
             timeCounter = switchCity(timeCounter);
@@ -137,7 +139,7 @@ function recruiter() {
         }
 
         setTimeout(() => {
-            window.BuildingWindowFactory.open(build[i]);
+            window.BuildingWindowFactory.open(wind[i]);
         }, timeCounter * slower * 1000 + Math.floor(Math.random() * 500));
         timeCounter++;
         setTimeout(() => {
@@ -233,7 +235,7 @@ function builder() {
 
     setTimeout(() => {
         window.MainWindowFactory.openMainWindow();
-    }, timeCounter * slower  * 1000 + Math.floor(Math.random() * 500));
+    }, timeCounter * slower * 1000 + Math.floor(Math.random() * 500));
     timeCounter++;
 
     for (let i = 0; i < build.length; i++) {
@@ -243,11 +245,7 @@ function builder() {
         }
         setTimeout(() => {
             window.BuildingMain.buildBuilding(building[i]);
-        }, timeCounter * slower  * 1000 + Math.floor(Math.random() * 500));
-        timeCounter++;
-        setTimeout(() => {
-            window.BuildingMain.buildBuilding(building[i]);
-        }, timeCounter * slower  * 1000 + Math.floor(Math.random() * 500));
+        }, timeCounter * slower * 1000 + Math.floor(Math.random() * 500));
         timeCounter++;
 
         timeCounter = switchCity(timeCounter);
