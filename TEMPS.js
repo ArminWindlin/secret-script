@@ -15,11 +15,13 @@ let recruiter_switch = true;///
 let culture_switch = true;/////
 let builder_switch = true;//////
 // CONFIG FARMER
-let islands = [34671, 23863, 19492, 18063, 24300, 20596, 23886, 32698, 31434, 25566,
-    30528, 21637, 29490, 28589, 24148, 22357, 25296, 27144, 31551, 35871,
-    34671];
+let islands = [34671, 23863, 21223, 19492, 18063, 16338, 24300, 20596, 22821, 23886,
+    36114, 35021, 34931, 37057, 32698, 31434, 25566, 30528, 21637, 35467,
+    29490, 28589, 24148, 22357, 25296, 27144, 31551, 35871, 34671];
 // CONFIG CULTURE
 let cul = [true, true, true, true, true,
+    true, true, true, true, true,
+    true, true, true, true, true,  //11-15
     true, true, true, true, true,
     true, true, true, true, true,
     true, true, true];
@@ -27,28 +29,38 @@ let orp = 1;
 let triumph = true;
 // CONFIG RECRUITER
 // trireme, bireme, attack_ship, chariot, hoplite, slinger, archer
-let rec = [true, false, true, false, true,
-    true, true, true, true, false,
-    false, true, true, true, true,
-    true, true, true, true, true];
+let rec = [false, false, false, false, false,
+    false, false, false, false, false,
+    false, true, false, true, false, //11-15
+    false, false, false, true, true,
+    false, true, false, true, true, //21-25
+    true, true, true];
 let wind = ['barracks', 'docks', 'docks', 'barracks', 'barracks',
     'barracks', 'docks', 'barracks', 'docks', 'barracks',
     'docks', 'barracks', 'docks', 'docks', 'barracks',
-    'docks', 'docks', 'docks', 'barracks', 'docks'];
+    'docks', 'docks', 'docks', 'barracks', 'barracks',
+    'docks', 'docks', 'docks', 'docks', 'docks',
+    'docks', 'docks', 'barracks'];
 let unit = ['harpy', 'bireme', 'attack_ship', 'hoplite', 'griffin',
     'hoplite', 'attack_ship', 'manticore', 'attack_ship', 'hoplite',
     'bireme', 'slinger', 'attack_ship', 'attack_ship', 'archer',
-    'bireme', 'attack_ship', 'attack_ship', 'hoplite', 'attack_ship'];
+    'bireme', 'attack_ship', 'attack_ship', 'hoplite', 'hoplite',
+    'bireme', 'attack_ship', 'attack_ship', 'bireme', 'attack_ship',
+    'bireme', 'attack_ship', 'hoplite'];
 // CONFIG BUILDER
 // main, lumber, ironer, stoner, farm, storage, academy, barracks, docks, temple, market, wall, hide
-let build = [false, false, true, false, false,
+let build = [false, false, true, true, false,
     true, true, false, true, true,
+    true, true, true, true, true, //11-15
+    true, false, true, true, true,
     true, true, true, true, true,
-    true, false, true, true, true];
-let building = ['', 'temple', 'docks', 'academy', '',
-    'temple', 'farm', '', 'academy', 'academy',
-    'storage', 'academy', 'farm', 'storage', 'farm',
-    'docks', '', 'storage', 'academy', 'academy'];
+    true, true, true];
+let building = ['', 'temple', 'lumber', 'market', '',
+    'ironer', 'temple', '', 'temple', 'barracks',
+    'lumber', 'ironer', 'temple', 'market', 'barracks', //11-15
+    'docks', '', 'docks', 'docks', 'barracks',
+    'temple', 'temple', 'storage', 'farm', 'storage', //21-25
+    'storage', 'storage', 'farm'];
 
 // AUTOMATION //
 
