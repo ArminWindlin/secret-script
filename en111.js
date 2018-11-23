@@ -8,22 +8,17 @@
 
 // CONFIG //
 let flag = false;
-let from = 6;
-let till = 24;
+let from = 5;
+let till = 23;
 let slower = 2;
 let slower_farmer = 1;
 let farmer_switch = true;
-let recruiter_switch = true;
-let culture_switch = true;
-let builder_switch = true;
+let recruiter_switch = false;
+let culture_switch = false;
+let builder_switch = false;
 // CONFIG FARMER
-let islands = [48849, 30675, 34671, 49529, 33271, 45178, 47618, 40024, 23863, 46974,
-    46947, 21223, 19492, 18063, 19292, 49522, 49523, 16338, 48616, 47435,
-    48064, 33924, 46077, 46675, 46739, 48369, 24300, 20596, 46647, 45622,
-    46108, 22821, 48570, 49093, 23886, 47840, 36114, 35021, 34931, 37057,
-    32698, 31434, 20764, 25566, 21637, 49326, 35467, 46729, 30528, 29490,
-    28589, 24148, 22357, 25296, 31551, 27144, 35871, 37837,
-    48849]; // one extra
+let islands = [5360, 3143, 8129, 7427,
+    5360]; // one extra
 // CONFIG CULTURE
 let cul = [true, true, true, true, true,
     true, true, true, true, true,
@@ -33,24 +28,22 @@ let cul = [true, true, true, true, true,
     true, true, true, true, true,
     true, true, true, true, true, //31-35
     true, true, true, true, true,
-    true, true, true, true, true, //41-45
-    true, true, true, true];
+    true, true, true, true, true];
 let orp = 4;
 let triumph = true;
 // CONFIG RECRUITER
 // trireme, bireme, attack_ship, chariot, hoplite, slinger, archer
 // barracks, docks
-let rec = [false, false, false, true, true,
+let rec = [true, true, true, true, true,
     true, true, true, true, true,
     true, true, true, true, true, //11-15
-    true, false, true, true, true,
+    true, true, true, true, true,
     true, true, true, true, true, //21-25
     true, true, true, true, true,
     true, true, true, true, true, //31-35
     true, true, true, true, true,
-    true, true, true, true, true, //41-45
-    true, true, true, true,];
-let wind = ['docks', 'docks', 'docks', 'docks', 'docks',
+    true, true, true, true, true];
+let wind = ['barracks', 'barracks', 'barracks', 'barracks', 'docks',
     'docks', 'docks', 'docks', 'docks', 'docks',
     'docks', 'docks', 'docks', 'docks', 'docks',
     'docks', 'docks', 'docks', 'docks', 'docks',
@@ -58,9 +51,8 @@ let wind = ['docks', 'docks', 'docks', 'docks', 'docks',
     'docks', 'docks', 'docks', 'docks', 'docks',
     'docks', 'docks', 'docks', 'docks', 'docks',
     'docks', 'docks', 'docks', 'docks', 'docks',
-    'docks', 'docks', 'docks', 'docks', 'docks',
-    'docks', 'docks', 'docks', 'docks'];
-let unit = ['trireme', 'trireme', 'trireme', 'trireme', 'trireme',
+    'docks', 'docks', 'docks', 'docks', 'docks'];
+let unit = ['harpy', 'griffin', 'manticore', 'slinger', 'trireme',
     'trireme', 'trireme', 'trireme', 'trireme', 'trireme',
     'trireme', 'trireme', 'trireme', 'trireme', 'trireme',
     'trireme', 'trireme', 'trireme', 'trireme', 'trireme',
@@ -68,41 +60,38 @@ let unit = ['trireme', 'trireme', 'trireme', 'trireme', 'trireme',
     'trireme', 'trireme', 'trireme', 'trireme', 'trireme',
     'trireme', 'trireme', 'trireme', 'trireme', 'trireme',
     'trireme', 'trireme', 'trireme', 'trireme', 'trireme',
-    'trireme', 'trireme', 'trireme', 'trireme', 'trireme',
-    'trireme', 'trireme', 'trireme', 'trireme'];
+    'trireme', 'trireme', 'trireme', 'trireme', 'trireme'];
 // CONFIG BUILDER
 // main, lumber, ironer, stoner, farm, storage, academy, barracks, docks, temple, market, wall, hide
 let build = [false, false, false, false, false,
     false, false, false, false, false,
     true, false, false, false, false, //11-15
-    false, false, true, false, false,
-    false, false, true, true, true, //21-25
-    true, false, false, false, false,
+    false, false, true, true, true,
+    true, false, true, true, true, //21-25
+    true, true, true, true, false,
     true, true, true, true, true, //31-35
     true, true, true, true, true,
     true, true, true, true, true, //41-45
     true, true, true, true, true,
-    true, true, true, true, true, //51-55
-    true, true, true];
+    true, true];
 let building = ['', '', '', '', '',
     '', '', '', '', '',
     'barracks', '', '', '', '', //11-15
-    '', '', '', '', '',
-    '', '', 'market', 'docks', 'barracks', //21-25
-    'docks', '', 'temple', '', '',
-    'temple', 'temple', 'temple', 'temple', 'temple', //31-35
+    '', '', 'stoner', 'barracks', 'market',
+    'market', '', 'stoner', 'docks', 'ironer', //21-25
+    'docks', 'temple', 'market', 'temple', '',
+    'temple', 'docks', 'market', 'temple', 'temple', //31-35
     'temple', 'farm', 'farm', 'farm', 'farm',
     'farm', 'farm', 'farm', 'farm', 'farm', //41-45
-    'farm', 'farm', 'farm', 'farm', 'academy',
-    'academy', 'academy', 'storage', 'storage', 'storage',
-    'storage', 'storage', 'storage'];
+    'academy', 'farm', 'farm', 'academy', 'storage',
+    'storage', 'storage'];
 
 // AUTOMATION //
 setInterval(() => {
     let hour = new Date().getHours();
     if (hour >= from && hour < till)
         multiFarmer();
-}, (20 * 60 * 1000 + Math.floor((Math.random() * 30000) + 1000)));
+}, (11 * 60 * 1000 + Math.floor((Math.random() * 30000) + 1000)));
 
 setInterval(() => {
     let hour = new Date().getHours();
