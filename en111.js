@@ -8,7 +8,7 @@
 
 // CONFIG //
 let flag = false;
-let from = 5;
+let from = 6;
 let till = 23;
 let slower = 2;
 let slower_farmer = 1;
@@ -17,8 +17,8 @@ let recruiter_switch = false;
 let culture_switch = false;
 let builder_switch = false;
 // CONFIG FARMER
-let islands = [5360, 3143, 8129, 7427,
-    5360]; // one extra
+let islands = [2878, 5360, 3143, 8129, 7427,
+    2878]; // one extra
 // CONFIG CULTURE
 let cul = [true, true, true, true, true,
     true, true, true, true, true,
