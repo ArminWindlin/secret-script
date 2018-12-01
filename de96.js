@@ -13,7 +13,7 @@ let till = 24;
 let slower = 2;
 let slower_farmer = 1;
 let farmer_switch = true;
-let recruiter_switch = true;
+let recruiter_switch = false;
 let culture_switch = true;
 let builder_switch = true;
 // CONFIG FARMER
@@ -25,58 +25,34 @@ let islands = [48849, 30675, 34671, 49529, 33271, 45178, 47618, 40024, 23863, 46
     28589, 24148, 22357, 25296, 31551, 27144, 35871, 37837,
     48849]; // one extra
 // CONFIG CULTURE
-let cul = [true, true, true, true, true,
-    true, true, true, true, true,
-    true, true, true, true, true,  //11-15
-    true, true, true, true, true,
-    true, true, true, true, true,  //21-25
-    true, true, true, true, true,
-    true, true, true, true, true, //31-35
-    true, true, true, true, true,
-    true, true, true, true, true, //41-45
-    true, true, true, true];
+let cul = [];
+for (let i = 0; i < 51; i++) {
+    cul.push(true);
+}
 let orp = 4;
 let triumph = true;
 // CONFIG RECRUITER
 // trireme, bireme, attack_ship, chariot, hoplite, slinger, archer
 // barracks, docks
-let rec = [false, false, false, true, true,
-    true, true, true, true, true,
-    true, true, true, true, true, //11-15
-    true, false, true, true, true,
-    true, true, true, true, true, //21-25
-    true, true, true, true, true,
-    true, true, true, true, true, //31-35
-    true, true, true, true, true,
-    true, true, true, true, true, //41-45
-    true, true, true, true,];
-let wind = ['docks', 'docks', 'docks', 'docks', 'docks',
-    'docks', 'docks', 'docks', 'docks', 'docks',
-    'docks', 'docks', 'docks', 'docks', 'docks',
-    'docks', 'docks', 'docks', 'docks', 'docks',
-    'docks', 'docks', 'docks', 'docks', 'docks',
-    'docks', 'docks', 'docks', 'docks', 'docks',
-    'docks', 'docks', 'docks', 'docks', 'docks',
-    'docks', 'docks', 'docks', 'docks', 'docks',
-    'docks', 'docks', 'docks', 'docks', 'docks',
-    'docks', 'docks', 'docks', 'docks'];
-let unit = ['trireme', 'trireme', 'trireme', 'trireme', 'trireme',
-    'trireme', 'trireme', 'trireme', 'trireme', 'trireme',
-    'trireme', 'trireme', 'trireme', 'trireme', 'trireme',
-    'trireme', 'trireme', 'trireme', 'trireme', 'trireme',
-    'trireme', 'trireme', 'trireme', 'trireme', 'trireme',
-    'trireme', 'trireme', 'trireme', 'trireme', 'trireme',
-    'trireme', 'trireme', 'trireme', 'trireme', 'trireme',
-    'trireme', 'trireme', 'trireme', 'trireme', 'trireme',
-    'trireme', 'trireme', 'trireme', 'trireme', 'trireme',
-    'trireme', 'trireme', 'trireme', 'trireme'];
+let rec = [];
+for (let i = 0; i < 51; i++) {
+    rec.push(true);
+}
+let wind = [];
+for (let i = 0; i < 51; i++) {
+    wind.push('docks');
+}
+let unit = [];
+for (let i = 0; i < 51; i++) {
+    unit.push('trireme');
+}
 // CONFIG BUILDER
 // main, lumber, ironer, stoner, farm, storage, academy, barracks, docks, temple, market, wall, hide
 let build = [false, false, false, false, false,
     false, false, false, false, false,
     true, false, false, false, false, //11-15
-    false, false, true, false, false,
-    false, false, true, true, true, //21-25
+    false, false, false, false, false,
+    false, false, false, true, false, //21-25
     true, false, false, false, false,
     true, true, true, true, true, //31-35
     true, true, true, true, true,
@@ -88,13 +64,13 @@ let building = ['', '', '', '', '',
     '', '', '', '', '',
     'barracks', '', '', '', '', //11-15
     '', '', '', '', '',
-    '', '', 'market', 'docks', 'barracks', //21-25
-    'docks', '', 'temple', '', '',
+    '', '', '', 'docks', '', //21-25
+    'market', '', 'temple', '', '',
     'temple', 'temple', 'temple', 'temple', 'temple', //31-35
     'temple', 'farm', 'farm', 'farm', 'farm',
     'farm', 'farm', 'farm', 'farm', 'farm', //41-45
-    'farm', 'farm', 'farm', 'farm', 'academy',
-    'academy', 'academy', 'storage', 'storage', 'storage',
+    'farm', 'farm', 'farm', 'farm', 'farm',
+    'farm', 'farm', 'academy', 'academy', 'storage',
     'storage', 'storage', 'storage'];
 
 // AUTOMATION //

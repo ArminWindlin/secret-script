@@ -14,22 +14,15 @@ let slower = 2;
 let slower_farmer = 1;
 let farmer_switch = true;
 let recruiter_switch = false;
-let culture_switch = false;
+let culture_switch = true;
 let builder_switch = false;
 // CONFIG FARMER
-let islands = [2878, 5360, 3143, 8129, 7427,
+let islands = [2878, 5360, 6122, 3143, 3055, 5448, 5221, 4875, 8129, 7427,
     2878]; // one extra
 // CONFIG CULTURE
 let cul = [true, true, true, true, true,
-    true, true, true, true, true,
-    true, true, true, true, true,  //11-15
-    true, true, true, true, true,
-    true, true, true, true, true,  //21-25
-    true, true, true, true, true,
-    true, true, true, true, true, //31-35
-    true, true, true, true, true,
     true, true, true, true, true];
-let orp = 4;
+let orp = 0;
 let triumph = true;
 // CONFIG RECRUITER
 // trireme, bireme, attack_ship, chariot, hoplite, slinger, archer
@@ -227,6 +220,10 @@ function culture() {
         timeCounter++;
         setTimeout(() => {
             $('.btn_city_festival.button_new')[0].click();
+        }, timeCounter * slower * 1000 + Math.floor(Math.random() * 500));
+        timeCounter++;
+        setTimeout(() => {
+            $('.btn_organize_olympic_games.button_new')[0].click();
         }, timeCounter * slower * 1000 + Math.floor(Math.random() * 500));
         timeCounter++;
         if (i === orp && triumph) {
