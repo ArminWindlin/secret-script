@@ -17,11 +17,13 @@ let recruiter_switch = false;
 let culture_switch = true;
 let builder_switch = false;
 // CONFIG FARMER
-let islands = [2878, 5360, 6122, 3143, 3055, 5448, 5221, 4875, 8129, 7427,
+let islands = [2878, 5360, 6683, 6122, 3143, 3055, 5448, 5221, 4875, 1212,
+    8599, 8129, 8641, 7427, 6213, 5264, 2600, 2174,
     2878]; // one extra
 // CONFIG CULTURE
 let cul = [true, true, true, true, true,
-    true, true, true, true, true];
+    true, true, true, true, true,
+    true, true];
 let orp = 0;
 let triumph = true;
 // CONFIG RECRUITER
@@ -220,10 +222,6 @@ function culture() {
         timeCounter++;
         setTimeout(() => {
             $('.btn_city_festival.button_new')[0].click();
-        }, timeCounter * slower * 1000 + Math.floor(Math.random() * 500));
-        timeCounter++;
-        setTimeout(() => {
-            $('.btn_organize_olympic_games.button_new')[0].click();
         }, timeCounter * slower * 1000 + Math.floor(Math.random() * 500));
         timeCounter++;
         if (i === orp && triumph) {
